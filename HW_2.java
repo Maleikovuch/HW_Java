@@ -1,19 +1,23 @@
-import java.util.Scanner; // импорт сканера
 import java.io.*;
 
 class HW_2 {
-    public static void main(String args[]) {
-
-        System.out.print("Введите число, которое надо возвести в степень: ");
-        Scanner scan = new Scanner(System.in);
-        int a = scan.nextInt();
-        System.out.print("Введите степень: ");
-        int b = scan.nextInt();
-        System.out.println("Возвести число " + (a) + " в степень " + (b));
-        scan.close();
+    public static void main(String args[]) throws Exception {
+        BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+        String str;
+        String[] in_str;
+        double[] a_b = new double[2];
+        int numbers;
+        int i = 0;
+        while ((str = br.readLine()) != null) {           
+            in_str = str.split("\\D+");
+            numbers = Integer.parseInt(String.join("", in_str));
+            a_b[i] = numbers;
+            // i++;
+        }
+        br.close();
         
     
-        double result = Math.pow(a, b);
+        double result = Math.pow(a_b[0], a_b[1]);
         System.out.println(result);
         newFile(result);
 
@@ -21,7 +25,7 @@ class HW_2 {
 
     public static void newFile(double result) {
         try {
-            PrintWriter printWriter = new PrintWriter("result.txt");
+            PrintWriter printWriter = new PrintWriter("output.txt");
             printWriter.println(result);
             printWriter.close();
         } catch (FileNotFoundException ex) {
